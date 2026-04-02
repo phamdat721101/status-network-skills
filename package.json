@@ -1,0 +1,18 @@
+{
+  "name": "status-network-toolkit",
+  "version": "1.0.0",
+  "description": "Status Network — AI Agent Skills & Builder Toolkit",
+  "type": "module",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy:testnet": "npx hardhat run scripts/deploy.js --network statusTestnet"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0"
+  },
+  "devDependencies": {
+    "hardhat": "^2.22.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.0"
+  }
+}

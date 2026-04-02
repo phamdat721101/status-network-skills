@@ -1,0 +1,8 @@
+[profile.default]
+src = "src/contracts"
+out = "out"
+libs = ["lib"]
+solc = "0.8.26"
+
+[rpc_endpoints]
+status_testnet = "https://rpc.testnet.status.network"
