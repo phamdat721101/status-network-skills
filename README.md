@@ -13,6 +13,7 @@ Gasless Ethereum L2 apps with composable privacy, Karma reputation, and native y
 ## Table of Contents
 
 - [Install Agent Skills](#install-agent-skills)
+- [Sample Prompts](#sample-prompts)
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Skills Overview](#skills-overview)
@@ -26,13 +27,19 @@ Gasless Ethereum L2 apps with composable privacy, Karma reputation, and native y
 
 ## Install Agent Skills
 
-One command installs Status Network knowledge into all your AI coding agents:
+One command installs Status Network knowledge into all your AI coding agents — no clone required:
 
 ```bash
-bash install.sh
+npx github:phamdat721101/status-network-skills
 ```
 
-The script auto-detects which agents are installed and configures only those:
+To uninstall:
+
+```bash
+npx github:phamdat721101/status-network-skills --uninstall
+```
+
+The installer auto-detects which agents are present and configures only those:
 
 | Agent | Global Location | Format |
 |-------|----------------|--------|
@@ -46,10 +53,61 @@ The script auto-detects which agents are installed and configures only those:
 
 The installer is **idempotent** — run it again to update, and existing blocks are replaced in-place.
 
-To uninstall:
+<details>
+<summary>Alternative: install from cloned repo</summary>
 
 ```bash
-bash install.sh --uninstall
+git clone https://github.com/phamdat721101/status-network-skills.git
+cd status-network-skills
+bash install.sh
+```
+
+</details>
+
+---
+
+## Sample Prompts
+
+After installing the skills, try these prompts with your AI coding agent.
+
+### Quick Prompts
+
+**Network Setup**
+- *"Set up a new project connected to Status Network testnet using ethers.js"*
+- *"Add Status Network to MetaMask programmatically in my React app"*
+
+**Gasless Transactions**
+- *"Implement a send button that auto-detects gasless vs premium fees on Status Network"*
+- *"Show the user their transaction fee using linea_estimateGas with Karma awareness"*
+
+**Karma Reputation**
+- *"Display the current user's Karma tier and balance in a dashboard component"*
+- *"Add a feature gate that only allows Gold tier (tier 3+) users to access premium features"*
+
+**Contract Deployment**
+- *"Create and deploy a Karma-gated NFT contract to Status Network testnet using Hardhat"*
+- *"Set up Foundry for Status Network and deploy a simple storage contract"*
+
+### Detailed Walkthrough — Building a Karma-Gated dApp
+
+Use this multi-step prompt to build a complete feature:
+
+```
+I want to build a Karma-gated dApp on Status Network. Here's what I need:
+
+1. Connect to Status Network testnet with ethers.js
+2. Read the user's Karma balance and tier from the on-chain contracts
+3. Show a dashboard with:
+   - Karma balance and tier name (e.g., "Gold — 15,000 Karma")
+   - Number of free transactions remaining this epoch
+   - A "Premium Action" button that is only enabled for tier 3+
+4. When the user clicks "Premium Action":
+   - Estimate gas using linea_estimateGas (Karma-aware)
+   - Show whether the transaction is FREE or has a premium fee
+   - Send the transaction and display the result
+5. Handle edge cases: wallet not connected, insufficient tier, fee changes
+
+Use the Status Network toolkit patterns for all gas estimation and Karma lookups.
 ```
 
 ---
@@ -78,7 +136,8 @@ Need testnet ETH? Grab some from the [faucet](https://faucet.status.network) or 
 ## Project Structure
 
 ```
-├── install.sh                          # AI agent skill installer (auto-detects agents)
+├── bin/install.cjs                     # CLI installer (npx-compatible)
+├── install.sh                          # Bash installer (legacy / cloned repo)
 ├── agent-skills/
 │   ├── status-network-rules.md         # Combined rules (Claude, Cursor, Copilot, etc.)
 │   └── kiro/
@@ -275,7 +334,7 @@ These rules are critical for correct behavior on Status Network:
 
 1. Fork the repo
 2. Add or improve agent skills in `agent-skills/`
-3. Test the installer: `bash install.sh`
+3. Test the installer: `node bin/install.cjs` or `bash install.sh`
 4. Submit a PR
 
 ---

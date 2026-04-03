@@ -1,11 +1,16 @@
 {
-  "name": "status-network-toolkit",
-  "version": "1.0.0",
+  "name": "status-network-skills",
+  "version": "1.1.0",
   "description": "Status Network — AI Agent Skills & Builder Toolkit",
   "type": "module",
+  "bin": {
+    "status-network-skills": "bin/install.cjs"
+  },
   "scripts": {
     "compile": "npx hardhat compile",
-    "deploy:testnet": "npx hardhat run scripts/deploy.js --network statusTestnet"
+    "deploy:testnet": "npx hardhat run scripts/deploy.js --network statusTestnet",
+    "install-skills": "node bin/install.cjs",
+    "uninstall-skills": "node bin/install.cjs --uninstall"
   },
   "dependencies": {
     "ethers": "^6.13.0"
